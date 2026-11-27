@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1a1a">
+  <title>Bani Rafael Juarez Barza | Portafolio</title>
+  <meta name="description" content="Portafolio de Bani Rafael Juarez Barza, estudiante de Ingeniería en TIC y desarrollador backend, con la interfaz del menú de Minecraft.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=28">
+</head>
+<body>
+
+  <!-- Fondo de video (img/inicio/video.mp4) -->
+  <div class="bg" aria-hidden="true">
+    <video class="bg-video" src="img/inicio/video.mp4" autoplay muted loop playsinline preload="auto"></video>
+  </div>
+  <div class="bg-shade" aria-hidden="true"></div>
+
+  <main id="app">
+
+    <!-- ============ INICIO ============ -->
+    <section class="screen screen-title" id="inicio" aria-label="Menú principal">
+      <div class="logo-wrap">
+        <img class="logo" src="img/logo.png" alt="Bani Rafael Juarez Barza">
+        <span class="edition">Edición Backend</span>
+        <span class="splash" id="splash" aria-hidden="true">¡Portafolio de desarrollador!</span>
+      </div>
+
+      <nav class="menu" aria-label="Menú principal">
+        <button class="mc-btn" type="button" data-go="proyectos" data-autofocus>Un jugador</button>
+        <button class="mc-btn" type="button" data-go="sobre-mi">Sobre mí</button>
+        <button class="mc-btn" type="button" data-go="habilidades">Habilidades</button>
+        <button class="mc-btn has-badge" type="button" data-go="contacto">Contacto <span class="btn-badge" id="badge-contact" title="¡Disponible para trabajar!"></span></button>
+        <div class="menu-row">
+          <button class="mc-btn icon-btn" type="button" data-opt="sound" id="btn-sound"></button>
+          <button class="mc-btn" type="button" data-go="opciones">Opciones...</button>
+          <button class="mc-btn" type="button" data-go="salir">Salir</button>
+        </div>
+      </nav>
+
+      <footer class="corner-bar">
+        <span id="version-text">Portafolio 1.0</span>
+        <span><span id="ach-count">Logros: 0/7</span><span class="copy"> · Copyright Bani Rafael. ¡Hecho con código!</span></span>
+      </footer>
+    </section>
+
+    <!-- ============ PROYECTOS (Un jugador) ============ -->
+    <section class="screen" id="proyectos" aria-labelledby="t-proyectos" hidden>
+      <header class="screen-head">
+        <img class="logo-mini" src="img/logo.png" alt="">
+        <h2 id="t-proyectos">Selecciona un mundo</h2>
+      </header>
+      <div class="panel panel-list">
+        <div class="world-list" id="world-list"></div>
+      </div>
+      <div class="screen-foot">
+        <button class="mc-btn" type="button" id="btn-play-world">Jugar mundo seleccionado</button>
+        <button class="mc-btn" type="button" data-back>Atrás</button>
+      </div>
+    </section>
+
+    <!-- ============ DETALLE DE PROYECTO ============ -->
+    <section class="screen" id="detalle" aria-labelledby="t-detalle" hidden>
+      <header class="screen-head">
+        <img class="logo-mini" src="img/logo.png" alt="">
+        <h2 id="t-detalle">Proyecto</h2>
+      </header>
+      <div class="panel panel-detail">
+        <p class="detail-sub" id="d-sub"></p>
+        <p id="d-desc"></p>
+        <h3>Tecnologías</h3>
+        <ul class="chips" id="d-stack"></ul>
+      </div>
+      <div class="screen-foot">
+        <button class="mc-btn" type="button" data-back>Atrás</button>
+      </div>
+    </section>
+
+    <!-- ============ SOBRE MÍ ============ -->
+    <section class="screen" id="sobre-mi" aria-labelledby="t-sobre" hidden>
+      <header class="screen-head">
+        <img class="logo-mini" src="img/logo.png" alt="">
+        <h2 id="t-sobre">Perfil profesional</h2>
+      </header>
+      <div class="panel panel-about">
+        <p>
+          Estudiante de Ingeniería en Tecnologías de la Información y Comunicaciones, especializado
+          en desarrollo backend. Construyo sistemas web y APIs con Laravel y Spring Boot, y diseño
+          bases de datos relacionales en PostgreSQL y MySQL.
+        </p>
+        <dl class="stats">
+          <div><dt>Especialidad</dt><dd>Desarrollo backend y APIs</dd></div>
+          <div><dt>Formación</dt><dd>Ingeniería en TIC</dd></div>
+          <div><dt>Lenguajes y frameworks</dt><dd>PHP · Laravel · Java · Spring Boot</dd></div>
+          <div><dt>Bases de datos</dt><dd>PostgreSQL · MySQL</dd></div>
+          <div><dt>Reconocimiento</dt><dd>3er lugar · Hackatón ITSAL</dd></div>
+          <div><dt>Certificaciones</dt><dd>Huawei ICT Academy (IA, 5G)</dd></div>
+          <div><dt>Ubicación</dt><dd>Salina Cruz, Oaxaca, México</dd></div>
+          <div><dt>Disponibilidad</dt><dd>Abierto a nuevas oportunidades</dd></div>
+        </dl>
+      </div>
+      <div class="screen-foot">
+        <div class="foot-row">
+          <!-- Botón de CV: falta configurar su función (por ejemplo, enlazar a un PDF) -->
+          <button class="mc-btn" type="button" id="btn-cv">Descargar CV</button>
+          <button class="mc-btn" type="button" data-go="contacto">Contáctame</button>
+        </div>
+        <button class="mc-btn" type="button" data-back>Atrás</button>
+      </div>
+    </section>
+
+    <!-- ============ HABILIDADES Y EXPERIENCIAS ============ -->
+    <section class="screen" id="habilidades" aria-labelledby="t-hab" hidden>
+      <header class="screen-head">
+        <img class="logo-mini" src="img/logo.png" alt="">
+        <h2 id="t-hab">Habilidades y experiencias</h2>
+      </header>
+      <div class="panel panel-book">
+        <div class="tabs" role="tablist" aria-label="Habilidades o experiencias">
+          <button class="mc-btn" type="button" role="tab" id="tab-skills" aria-selected="true" aria-controls="book-body">Habilidades</button>
+          <button class="mc-btn" type="button" role="tab" id="tab-exp" aria-selected="false" aria-controls="book-body">Experiencias</button>
+        </div>
+        <div class="book-body" id="book-body" role="tabpanel"></div>
+      </div>
+      <div class="screen-foot">
+        <button class="mc-btn" type="button" data-back>Atrás</button>
+      </div>
+    </section>
+
+    <!-- ============ CONTACTO ============ -->
+    <section class="screen" id="contacto" aria-labelledby="t-contacto" hidden>
+      <header class="screen-head">
+        <img class="logo-mini" src="img/logo.png" alt="">
+        <h2 id="t-contacto">Chat</h2>
+      </header>
+      <div class="panel panel-contact">
+        <div class="contact-links" id="contact-links"></div>
+        <form class="chat-form" id="chat-form" novalidate>
+          <label for="f-name">Tu nombre</label>
+          <input id="f-name" name="name" type="text" maxlength="60" autocomplete="name">
+          <label for="f-msg">Mensaje</label>
+          <textarea id="f-msg" name="msg" rows="4" maxlength="500"></textarea>
+          <p class="form-msg" id="form-msg" role="status"></p>
+          <button class="mc-btn" type="submit">Enviar mensaje</button>
+        </form>
+      </div>
+      <div class="screen-foot">
+        <button class="mc-btn" type="button" data-back>Atrás</button>
+      </div>
+    </section>
+
+    <!-- ============ OPCIONES ============ -->
+    <section class="screen" id="opciones" aria-labelledby="t-opc" hidden>
+      <header class="screen-head">
+        <img class="logo-mini" src="img/logo.png" alt="">
+        <h2 id="t-opc">Opciones</h2>
+      </header>
+      <div class="panel panel-options">
+        <button class="mc-btn" type="button" data-opt="sound" id="opt-sound"></button>
+        <button class="mc-btn" type="button" data-opt="ach" id="opt-ach"></button>
+        <button class="mc-btn" type="button" data-opt="reset" id="opt-reset">Reiniciar logros</button>
+      </div>
+      <div class="screen-foot">
+        <button class="mc-btn" type="button" data-back>Hecho</button>
+      </div>
+    </section>
+
+    <!-- ============ FINAL ============ -->
+    <section class="screen screen-end" id="salir" aria-labelledby="t-end" hidden>
+      <div class="adv-box">
+        <div class="adv-title"><span class="adv-icon" id="end-icon"></span> ¡Logro conseguido! <b>¿El fin?</b></div>
+        <div class="adv-body">
+          <h2 id="t-end">¡Gracias por visitar!</h2>
+          <p>Cerraste el portafolio, pero el mundo sigue abierto.</p>
+        </div>
+      </div>
+      <div class="screen-foot">
+        <button class="mc-btn" type="button" data-go="inicio" data-autofocus>Volver al inicio</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Gólem de cobre que cruza la pantalla de inicio (img/inicio/) -->
+  <div id="golem" aria-hidden="true" hidden><img alt=""></div>
+
+  <div id="toasts" aria-live="polite"></div>
+  <div id="tooltip" class="tip" role="tooltip" hidden></div>
+
+  <script src="js/main.js?v=28"></script>
+</body>
+</html>

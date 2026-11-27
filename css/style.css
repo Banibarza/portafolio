@@ -280,8 +280,7 @@ h3 {
 /* ---------- Detalle ---------- */
 /* Muestra del proyecto: captura en marco con bisel y el nombre encima */
 .preview {
-  max-width: 520px;   /* tamaño moderado, centrada */
-  margin: 0 auto 18px;
+  margin: 0 0 18px;
   padding: 6px;
   background: #c6c6c6;
   border: 2px solid #000;
@@ -305,19 +304,19 @@ h3 {
 .preview-shot figcaption {
   position: absolute; left: 0; right: 0; bottom: 0;
   display: flex; flex-direction: column; gap: 6px;
-  padding: 22px clamp(10px, 2.4vw, 16px) clamp(8px, 1.6vw, 12px);
+  padding: 28px clamp(12px, 3vw, 22px) clamp(10px, 2vw, 16px);
   background: linear-gradient(transparent, rgba(0,0,0,.7) 30%, rgba(0,0,0,.9));
 }
 .preview-tag {
-  font: 400 clamp(8px, 1.2vw, 10px)/1 var(--f-head);
+  font: 400 clamp(9px, 1.4vw, 11px)/1 var(--f-head);
   color: #ffaa00; text-transform: uppercase; letter-spacing: .06em;
 }
 .preview-tag::before { content: "> "; }
 .preview-name {
-  font: 400 clamp(14px, 2.6vw, 22px)/1.1 var(--f-head);
+  font: 400 clamp(16px, 3.4vw, 30px)/1.1 var(--f-head);
   color: #fff; text-shadow: 3px 3px 0 #3f3f3f;
 }
-.preview-stack { color: #d0d0d0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1; }
+.preview-stack { color: #d0d0d0; font-size: clamp(16px, 2vw, 20px); line-height: 1; }
 .preview-stack::before {
   content: ""; display: inline-block; width: 22px; height: 3px;
   margin-right: 8px; vertical-align: middle; background: #ffaa00;

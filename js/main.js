@@ -147,6 +147,20 @@ const EXPERIENCES = [
     wide: true
   },
   {
+    title: 'Curso de Inteligencia Artificial · CPFIA',
+    place: 'Tecnológico Nacional de México · MOOC TecNM',
+    period: '2026',
+    desc: 'Curso propedéutico del Centro Público de Formación en Inteligencia Artificial (CPFIA) del Gobierno de México.',
+    icon: 'botella'
+  },
+  {
+    title: 'Inglés como lengua extranjera · Nivel B1',
+    place: 'Facultad de Idiomas, UABJO · Sede Tehuantepec',
+    period: '2026',
+    desc: 'Cuatro niveles concluidos, equivalentes al nivel B1 del Marco Común Europeo de Referencia: comprensión lectora y auditiva, y producción oral y escrita.',
+    icon: 'cofre'
+  },
+  {
     title: 'Formación en programación',
     place: 'Alura Latam',
     period: '2024',

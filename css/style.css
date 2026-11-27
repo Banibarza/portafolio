@@ -240,6 +240,21 @@ h3 {
 .world:hover { border-color: #9a9a9a; }
 .world[aria-pressed="true"] { border-color: #fff; }
 .world:focus-visible { outline: 3px solid #fff; }
+/* Captura difuminada al fondo del mundo (solo si el proyecto tiene "preview") */
+.world.has-bg { position: relative; overflow: hidden; flex-shrink: 0; } /* sin encogerse en la lista */
+.world.has-bg > :not(.world-bg) { position: relative; z-index: 1; }
+.world-bg {
+  position: absolute; top: 0; right: 0; bottom: 0; width: 65%;
+  background-size: cover; background-position: 50% 0;   /* se ve el encabezado y el menú */
+  opacity: .55;
+  filter: blur(1px) brightness(.8);
+  /* Se desvanece hacia la izquierda para no tapar el texto */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 70%);
+          mask-image: linear-gradient(to right, transparent, #000 70%);
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.world:hover .world-bg, .world[aria-pressed="true"] .world-bg { opacity: .75; }
 .world-icon { flex: none; width: 56px; height: 56px; }
 .world-icon svg, .world-icon img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .world-name { display: block; font-size: 26px; color: #fff; }

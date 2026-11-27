@@ -895,6 +895,7 @@ function exitSite() {
 }
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !$('#lightbox').hidden) { clickSound(); closeLightbox(); return; }
   if (e.key === 'Escape' && state.screen !== 'inicio') { clickSound(); back(); }
 });
 
@@ -916,3 +917,27 @@ restoreFromHash();
 runGolem();
 loadIconFiles();
 loadSounds();
+
+/* =========================================================
+   Visor de capturas (en la misma página, sin abrir otra pestaña)
+   ========================================================= */
+let lightboxReturn = null;
+function openLightbox(src, alt) {
+  lightboxReturn = document.activeElement;
+  $('#lightbox-img').src = src;
+  $('#lightbox-img').alt = alt || '';
+  $('#lightbox').hidden = false;
+  $('#lightbox-close').focus({ preventScroll: true });
+}
+function closeLightbox() {
+  $('#lightbox').hidden = true;
+  if (lightboxReturn) lightboxReturn.focus({ preventScroll: true });
+}
+$('#d-preview-link').addEventListener('click', e => {
+  e.preventDefault();
+  clickSound();
+  openLightbox($('#d-preview-img').src, $('#d-preview-img').alt);
+});
+$('#lightbox-close').addEventListener('click', closeLightbox);
+// Clic fuera de la imagen también cierra
+$('#lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') { clickSound(); closeLightbox(); } });

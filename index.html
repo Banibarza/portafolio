@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=56">
+  <link rel="stylesheet" href="css/style.css?v=58">
 </head>
 <body>
 
@@ -71,7 +71,7 @@
       <div class="panel panel-detail">
         <!-- Muestra del proyecto (solo si tiene "preview" en PROJECTS) -->
         <figure class="preview" id="d-preview" hidden>
-          <a class="preview-shot" id="d-preview-link" href="#" target="_blank" rel="noopener" title="Ver captura completa">
+          <a class="preview-shot" id="d-preview-link" href="#" title="Ver captura completa">
             <img id="d-preview-img" alt="" decoding="async">
             <figcaption>
               <span class="preview-tag" id="d-preview-tag"></span>
@@ -203,9 +203,17 @@
   <div id="golem" aria-hidden="true" hidden><img alt=""></div>
   <div id="allay" aria-hidden="true" hidden><img alt=""></div>
 
+  <!-- Visor de capturas: se abre dentro de la página (Cerrar, clic fuera o Esc) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Captura del proyecto" hidden>
+    <figure class="lightbox-box">
+      <img id="lightbox-img" alt="">
+      <button class="mc-btn" type="button" id="lightbox-close">Cerrar</button>
+    </figure>
+  </div>
+
   <div id="toasts" aria-live="polite"></div>
   <div id="tooltip" class="tip" role="tooltip" hidden></div>
 
-  <script src="js/main.js?v=51"></script>
+  <script src="js/main.js?v=52"></script>
 </body>
 </html>

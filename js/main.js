@@ -27,7 +27,7 @@ const PROJECTS = [
           'Mi parte es el backend del módulo de Gestión Académica: grupos, horarios, aspirantes y preinscripción, ' +
           'y calificaciones, con autenticación JWT y control de acceso por roles. Las pruebas corren contra PostgreSQL real.',
     stack: ['Laravel 12', 'PHP 8.4', 'PostgreSQL 16', 'Docker', 'JWT', 'Spatie Permission', 'Pest', 'Git Flow'],
-    icon: 'pasto',
+    icon: 'cofre',
     tag: 'Residencia profesional'
   },
   {
@@ -48,7 +48,7 @@ const PROJECTS = [
           'Las respuestas se envían en streaming, así que el texto aparece mientras el modelo lo genera, ' +
           'en una interfaz web sencilla.',
     stack: ['Java 17', 'Spring Boot', 'Spring AI', 'Ollama', 'HTML', 'JavaScript'],
-    icon: 'pasto',
+    icon: 'estrella',
     tag: 'Inteligencia artificial'
   },
   {
@@ -57,7 +57,7 @@ const PROJECTS = [
     desc: 'Aplicación en Java con Spring Boot que integra la API de Telegram: recibe los mensajes enviados al bot, ' +
           'los procesa y responde automáticamente a cada usuario.',
     stack: ['Java', 'Spring Boot', 'Telegram API', 'Maven'],
-    icon: 'pasto',
+    icon: 'brujula',
     tag: 'Integración de APIs'
   },
   {
@@ -66,7 +66,7 @@ const PROJECTS = [
     desc: 'Aplicación de chat en tiempo real con Spring WebSocket. El servidor gestiona las conexiones ' +
           'y reenvía cada mensaje a los usuarios conectados, con un cliente web en Thymeleaf y JavaScript.',
     stack: ['Java', 'Spring Boot', 'WebSocket', 'Thymeleaf', 'JavaScript'],
-    icon: 'pasto',
+    icon: 'esmeralda',
     tag: 'Tiempo real'
   }
 ];
@@ -84,7 +84,8 @@ const CATS = {
 // "cat" puede ser: backend, datos, frontend, integraciones, herramientas u otras.
 // "badge" es opcional (la versión que se muestra junto al nombre).
 // "icon" es opcional: espada, hacha, pico, pico-hierro, brujula, casco, totem, libro, botella,
-// manzana, cofre, mesa, diamante, oro, tnt.
+// manzana, cofre, mesa, diamante, oro, tnt, esmeralda, reloj, creeper, horno, estrella,
+// cabeza, cama, pasto (las imágenes están en ICON_FILES).
 const SKILLS = [
   { name: 'Laravel',          cat: 'backend',       badge: '12',  icon: 'espada' },
   { name: 'PHP',              cat: 'backend',       badge: '8.4', icon: 'hacha' },
@@ -111,7 +112,7 @@ const EXPERIENCES = [
     place: 'Escuela Secundaria Técnica Núm. 28, Salina Cruz',
     period: '2026',
     desc: 'Backend del módulo de Gestión Académica: grupos, horarios, aspirantes y preinscripción, y calificaciones, con autenticación JWT, control de acceso por roles y pruebas automatizadas con Pest.',
-    icon: 'mesa'
+    icon: 'casco'
   },
   {
     title: 'Proyectos con Java y Spring Boot',
@@ -125,7 +126,7 @@ const EXPERIENCES = [
     place: 'Hackatón del Tecnológico de Salina Cruz (ITSAL)',
     period: '2025',
     desc: 'Desarrollamos en equipo un sistema web en PHP y MySQL para gestionar rutas, camiones, colonias, incidencias, avisos y usuarios del servicio de recolección de basura. El proyecto obtuvo el tercer lugar.',
-    icon: 'oro'
+    icon: 'tnt'
   },
   {
     title: 'Certificación · Artificial Intelligence Technology and Applications',
@@ -148,7 +149,7 @@ const EXPERIENCES = [
     place: 'Alura Latam',
     period: '2024',
     desc: 'Cursos y retos prácticos de lógica de programación y JavaScript.',
-    icon: 'manzana'
+    icon: 'libro'
   }
 ];
 

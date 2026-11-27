@@ -7,7 +7,8 @@ const CONFIG = {
   // Deja vacío ('') lo que aún no tengas; el botón saldrá desactivado.
   email: 'banibarza19@gmail.com',
   github: 'https://github.com/Banibarza',
-  linkedin: 'https://www.linkedin.com/in/bani-rafael-juarez-barza-67711b2b2/'
+  linkedin: 'https://www.linkedin.com/in/bani-rafael-juarez-barza-67711b2b2/',
+  cv: 'docs/CV_Bani_Rafael_Juarez_Barza.pdf'   // PDF que baja el botón "Descargar CV"
 };
 
 const SPLASHES = [
@@ -160,7 +161,8 @@ const ACHIEVEMENTS = {
   'sobre-mi':    'Conociendo al jugador',
   'habilidades': 'Libro de habilidades',
   'contacto':    'Mensaje en una botella',
-  'opciones':    'Ajustes finos'
+  'opciones':    'Ajustes finos',
+  'cv':          'Botín legendario'   // al descargar el CV
 };
 
 /* =========================================================
@@ -941,3 +943,18 @@ $('#d-preview-link').addEventListener('click', e => {
 $('#lightbox-close').addEventListener('click', closeLightbox);
 // Clic fuera de la imagen también cierra
 $('#lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') { clickSound(); closeLightbox(); } });
+
+/* =========================================================
+   Descargar CV: baja el PDF y da el logro "Botín legendario"
+   ========================================================= */
+$('#btn-cv').addEventListener('click', () => {
+  if (!CONFIG.cv) return;
+  const a = document.createElement('a');
+  a.href = CONFIG.cv;
+  a.download = CONFIG.cv.split('/').pop();
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  unlock('cv');   // el aviso usa el mismo sonido que los demás logros (logro.mp3)
+});
+

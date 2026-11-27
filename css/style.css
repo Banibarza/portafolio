@@ -172,6 +172,10 @@ body:not([data-screen="inicio"]) .bg-shade { background: rgba(0,0,0,.45); }
   animation: bob 1.6s ease-in-out infinite;
 }
 .btn-badge svg, .btn-badge img { width: 100%; height: 100%; display: block; }
+/* La esmeralda tiene borde vacío en el PNG: se agranda un poco */
+.btn-badge img { transform: scale(1.3); }
+/* Las cabezas (jugador y creeper) solo ocupan la mitad de su imagen: se agrandan para igualar al resto */
+img[src*="_Head_(S)"] { transform: scale(1.6); }
 @keyframes bob { 50% { transform: translateY(-62%); } }
 
 /* ---------- Pantallas internas ---------- */

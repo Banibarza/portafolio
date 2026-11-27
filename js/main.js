@@ -90,17 +90,17 @@ const SKILLS = [
   { name: 'PHP',              cat: 'backend',       badge: '8.4', icon: 'hacha' },
   { name: 'Java',             cat: 'backend',       badge: '17',  icon: 'pico' },
   { name: 'Spring Boot',      cat: 'backend',                     icon: 'totem' },
-  { name: 'JWT + Spatie',     cat: 'backend',                     icon: 'casco' },
-  { name: 'Pest',             cat: 'backend',                     icon: 'tnt' },
+  { name: 'JWT + Spatie',     cat: 'backend',                     icon: 'cabeza' },
+  { name: 'Pest',             cat: 'backend',                     icon: 'creeper' },
   { name: 'PostgreSQL',       cat: 'datos',         badge: '16',  icon: 'diamante' },
   { name: 'MySQL',            cat: 'datos',                       icon: 'botella' },
   { name: 'Angular',          cat: 'frontend',                    icon: 'manzana' },
   { name: 'HTML, CSS y JS',   cat: 'frontend',                    icon: 'pico-hierro' },
-  { name: 'Spring AI + Ollama', cat: 'integraciones',             icon: 'libro' },
-  { name: 'WebSocket',        cat: 'integraciones',               icon: 'brujula' },
+  { name: 'Spring AI + Ollama', cat: 'integraciones',             icon: 'estrella' },
+  { name: 'WebSocket',        cat: 'integraciones',               icon: 'reloj' },
   { name: 'Telegram API',     cat: 'integraciones',               icon: 'oro' },
-  { name: 'Docker',           cat: 'herramientas',                icon: 'cofre' },
-  { name: 'Git Flow',         cat: 'herramientas',                icon: 'brujula' },
+  { name: 'Docker',           cat: 'herramientas',                icon: 'horno' },
+  { name: 'Git Flow',         cat: 'herramientas',                icon: 'cama' },
   { name: 'Maven',            cat: 'herramientas',                icon: 'mesa' }
 ];
 
@@ -241,6 +241,13 @@ const ICON_FILES = {
   diamante:'img/Diamond_JE3_BE3.png',
   oro:     'img/Gold_Ingot_JE4_BE2.png',
   tnt:     'img/TNT_JE3_BE2.png',
+  esmeralda: 'img/Emerald_JE3_BE3.png',
+  reloj:   'img/Clock_JE3_BE3.gif',
+  creeper: 'img/Creeper_Head_(S)_JE1.png',
+  horno:   'img/Lit_Furnace_(S).gif',
+  estrella:'img/Nether_Star.gif',
+  cabeza:  'img/Player_Head_(S)_JE2.png',
+  cama:    'img/Red_Bed_(item)_BE2.png',
   // Insignias de certificaciones
   'huawei-ia': 'img/huawei-ia.png',
   'huawei-5g': 'img/huawei-5g.png'

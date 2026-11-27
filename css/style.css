@@ -243,30 +243,33 @@ h3 {
   border: 2px solid transparent;
   cursor: pointer;
 }
-/* Mismo contorno morado de encantamiento que en Habilidades */
+/* Solo el proyecto seleccionado lleva el contorno morado (como en Habilidades);
+   al pasar el mouse por otro solo se ilumina un poco, sin contorno */
 .world { transition: background .15s ease, box-shadow .15s ease; }
-.world:hover,
+.world:hover { background: rgba(40, 10, 70, .4); }
 .world[aria-pressed="true"] {
   border-color: #a46bff;
   background: rgba(40, 10, 70, .6);
   box-shadow: 0 0 14px rgba(164, 107, 255, .55);
 }
-.world:focus-visible { outline: 3px solid #fff; }
-/* Captura difuminada al fondo del mundo (solo si el proyecto tiene "preview") */
-.world.has-bg { position: relative; overflow: hidden; flex-shrink: 0; } /* sin encogerse en la lista */
-.world.has-bg > :not(.world-bg) { position: relative; z-index: 1; }
-.world-bg {
-  position: absolute; top: 0; right: 0; bottom: 0; width: 65%;
-  background-size: cover; background-position: 50% 0;   /* se ve el encabezado y el menú */
-  opacity: .55;
-  filter: blur(1px) brightness(.8);
-  /* Se desvanece hacia la izquierda para no tapar el texto */
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 70%);
-          mask-image: linear-gradient(to right, transparent, #000 70%);
-  transition: opacity .25s ease;
-  pointer-events: none;
+/* Con teclado se nota el foco con el mismo morado, sin borde blanco encima */
+.world:focus { outline: none; }
+.world:focus-visible:not([aria-pressed="true"]) { border-color: #a46bff; }
+
+/* Miniatura de la captura a la derecha (solo si el proyecto tiene "preview") */
+.world > span:nth-child(2) { flex: 1; min-width: 0; }
+.world-thumb {
+  flex: none; margin-left: auto;
+  width: clamp(96px, 16vw, 150px); aspect-ratio: 1366 / 900;
+  padding: 3px;
+  background: #c6c6c6;
+  border: 2px solid #000;
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #555;
 }
-.world:hover .world-bg, .world[aria-pressed="true"] .world-bg { opacity: .75; }
+.world-thumb img {
+  width: 100%; height: 100%; display: block; object-fit: cover;
+  border: 2px solid; border-color: #373737 #fff #fff #373737;
+}
 .world-icon { flex: none; width: 56px; height: 56px; }
 .world-icon svg, .world-icon img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .world-name { display: block; font-size: 26px; color: #fff; }
@@ -645,6 +648,10 @@ body:not([data-screen="inicio"]) #allay { display: none; }
 
   /* Proyectos */
   .world { padding: 10px 8px; gap: 12px; }
+  /* La miniatura pasa abajo del texto para no apretarlo */
+  .world.has-thumb { flex-wrap: wrap; row-gap: 8px; }
+  .world.has-thumb > span:nth-child(2) { flex: 1 1 calc(100% - 64px); }
+  .world.has-thumb .world-thumb { margin-left: 60px; width: 150px; }
   .world-icon { width: 48px; height: 48px; }
   .world-name { font-size: 24px; }
 

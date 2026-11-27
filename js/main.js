@@ -660,13 +660,13 @@ function renderWorlds() {
     b.setAttribute('aria-pressed', String(i === state.selected));
     b.innerHTML = `<span class="world-icon">${icon(p.icon)}</span>
       <span><span class="world-name"></span><span class="world-sub"></span><span class="world-tag"></span></span>`;
-    // Si el proyecto tiene captura, se ve difuminada al fondo, a la derecha
+    // Si el proyecto tiene captura, se muestra una miniatura a la derecha
     if (p.preview) {
-      const bg = document.createElement('span');
-      bg.className = 'world-bg';
-      bg.style.backgroundImage = `url("${p.preview}")`;
-      b.prepend(bg);
-      b.classList.add('has-bg');
+      const th = document.createElement('span');
+      th.className = 'world-thumb';
+      th.innerHTML = `<img src="${p.preview}" alt="" loading="lazy" decoding="async">`;
+      b.appendChild(th);
+      b.classList.add('has-thumb');
     }
     $('.world-name', b).textContent = p.name;
     $('.world-sub', b).textContent = p.sub;

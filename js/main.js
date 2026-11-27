@@ -554,7 +554,19 @@ function unlock(id) {
   if (state.achievements) showToast(ACHIEVEMENTS[id]);
 }
 
+// Los avisos salen de uno en uno: el siguiente aparece cuando el anterior ya se fue.
+const toastQueue = [];
+let toastBusy = false;
+
 function showToast(name) {
+  toastQueue.push(name);
+  if (!toastBusy) nextToast();
+}
+
+function nextToast() {
+  const name = toastQueue.shift();
+  if (name === undefined) { toastBusy = false; return; }
+  toastBusy = true;
   const box = document.createElement('div');
   box.className = 'toast';
   box.innerHTML = `<span class="toast-icon">${icon('libro')}</span>
@@ -564,7 +576,10 @@ function showToast(name) {
   levelSound();
   setTimeout(() => {
     box.classList.add('out');
-    box.addEventListener('animationend', () => box.remove(), { once: true });
+    let done = false;
+    const finish = () => { if (done) return; done = true; box.remove(); nextToast(); };
+    box.addEventListener('animationend', finish, { once: true });
+    setTimeout(finish, 600); // por si la animación no dispara el evento
   }, 2200);
 }
 

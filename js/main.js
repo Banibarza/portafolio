@@ -298,9 +298,8 @@ function saveState() {
 const SOUND_DIR = 'assets/sonidos/';
 const SOUND_EXTS = ['ogg', 'mp3', 'wav'];
 const SOUNDS = {
-  click:  { vol: 0.6 },
+  tocar:  { vol: 0.6 },
   logro:  { vol: 0.7 },
-  pagina: { vol: 0.6 },
   mundo:  { vol: 0.7 },
   musica: { vol: 0.25, loop: true }
 };
@@ -324,21 +323,77 @@ function probeSound(name) {
   });
 }
 
-function loadSounds() {
-  Object.keys(SOUNDS).forEach(name => probeSound(name).then(a => {
+// Efectos cortos: se descargan y decodifican en memoria (Web Audio) para que
+// suenen al instante, y se salta el silencio que traiga el archivo al inicio.
+const soundBuffers = {}; // nombre -> { buf, offset }
+const soundReady = {};   // nombre -> promesa de carga
+
+function getAudioCtx() {
+  audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function leadingSilence(buf) {
+  const d = buf.getChannelData(0);
+  let i = 0;
+  while (i < d.length && Math.abs(d[i]) < 0.01) i++;
+  return Math.max(0, i / buf.sampleRate - 0.005);
+}
+
+async function loadBuffer(name) {
+  for (const ext of SOUND_EXTS) {
+    const res = await fetch(`${SOUND_DIR}${name}.${ext}`);
+    if (!res.ok) continue;
+    const buf = await getAudioCtx().decodeAudioData(await res.arrayBuffer());
+    soundBuffers[name] = { buf, offset: leadingSilence(buf) };
+    soundUrls[name] = res.url;
+    return;
+  }
+  soundUrls[name] = null;
+}
+
+function loadHtmlAudio(name) {
+  return probeSound(name).then(a => {
     soundUrls[name] = a ? a.src : null;
     if (!a) return;
     a.volume = SOUNDS[name].vol;
     a.loop = !!SOUNDS[name].loop;
     soundFiles[name] = a;
     if (name === 'musica' && musicWanted) syncMusic();
-  }));
+  });
+}
+
+function loadSounds() {
+  Object.keys(SOUNDS).forEach(name => {
+    soundReady[name] = SOUNDS[name].loop
+      ? loadHtmlAudio(name)
+      // Si fetch no se puede usar (p. ej. abriendo el HTML con file://), se usa <audio>.
+      : loadBuffer(name).catch(() => loadHtmlAudio(name));
+  });
+}
+
+function playBuffer(name) {
+  const { buf, offset } = soundBuffers[name];
+  const ctx = getAudioCtx();
+  if (ctx.state === 'suspended') ctx.resume();
+  const src = ctx.createBufferSource();
+  const gain = ctx.createGain();
+  gain.gain.value = SOUNDS[name].vol;
+  src.buffer = buf;
+  src.connect(gain).connect(ctx.destination);
+  src.start(0, offset);
 }
 
 // Reproduce el archivo si existe; solo usa el sintetizado si el archivo
 // definitivamente no está (o falla al reproducirse).
 function play(name, fallback) {
   if (!state.sound) return;
+  if (soundBuffers[name]) return playBuffer(name);
+  if (soundUrls[name] === undefined && soundReady[name]) {
+    // Aún cargando: se reproduce en cuanto esté listo.
+    soundReady[name].then(() => play(name, fallback));
+    return;
+  }
   const known = soundUrls[name];
   if (known === null) { if (fallback) fallback(); return; }
   const urls = known ? [known] : SOUND_EXTS.map(ext => `${SOUND_DIR}${name}.${ext}`);
@@ -382,9 +437,8 @@ function tone(freq, dur, { type = 'square', vol = 0.05, delay = 0 } = {}) {
     osc.stop(t + dur);
   } catch (e) { /* audio no disponible */ }
 }
-const clickSound = () => play('click', () => { tone(220, 0.06); tone(150, 0.05, { delay: 0.02 }); });
+const clickSound = () => play('tocar', () => { tone(220, 0.06); tone(150, 0.05, { delay: 0.02 }); });
 const levelSound = () => play('logro', () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.14, { type: 'triangle', vol: 0.07, delay: i * 0.09 })));
-const pageSound  = () => play('pagina', () => tone(320, 0.05, { type: 'triangle', vol: 0.05 }));
 const worldSound = () => play('mundo', () => [392, 523].forEach((f, i) => tone(f, 0.12, { type: 'triangle', vol: 0.06, delay: i * 0.08 })));
 
 /* =========================================================
@@ -634,8 +688,8 @@ function renderTabIcons() {
 
 function initBook() {
   renderTabIcons();
-  $('#tab-skills').addEventListener('click', () => { if (bookTab !== 'skills') pageSound(); bookTab = 'skills'; renderBook(); updateHash(); });
-  $('#tab-exp').addEventListener('click', () => { if (bookTab !== 'exp') pageSound(); bookTab = 'exp'; renderBook(); updateHash(); });
+  $('#tab-skills').addEventListener('click', () => { bookTab = 'skills'; renderBook(); updateHash(); });
+  $('#tab-exp').addEventListener('click', () => { bookTab = 'exp'; renderBook(); updateHash(); });
   renderBook();
 }
 
@@ -727,7 +781,7 @@ function onOption(kind) {
 document.addEventListener('click', e => {
   const el = e.target.closest('button, a');
   if (!el) return;
-  if (el.matches('.mc-btn, .world') && !el.matches('[role="tab"]') && !el.disabled) clickSound();
+  if (el.matches('.mc-btn, .world') && !el.disabled) clickSound();
 
   if (el.dataset.go) go(el.dataset.go);
   else if (el.hasAttribute('data-back')) back();

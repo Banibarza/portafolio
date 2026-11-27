@@ -228,7 +228,13 @@ h3 {
 
 /* ---------- Lista de mundos ---------- */
 .panel-list { padding: 8px; }
-.world-list { display: flex; flex-direction: column; gap: 6px; max-height: 52svh; overflow-y: auto; }
+.world-list {
+  display: flex; flex-direction: column; gap: 6px; max-height: 52svh; overflow-y: auto;
+  padding: 6px;   /* espacio para que se vea el brillo morado */
+  /* Sin barra de desplazamiento visible (se sigue pudiendo desplazar) */
+  scrollbar-width: none;
+}
+.world-list::-webkit-scrollbar { display: none; }
 .world {
   display: flex; align-items: center; gap: 14px;
   width: 100%; padding: 10px; text-align: left;
@@ -237,8 +243,14 @@ h3 {
   border: 2px solid transparent;
   cursor: pointer;
 }
-.world:hover { border-color: #9a9a9a; }
-.world[aria-pressed="true"] { border-color: #fff; }
+/* Mismo contorno morado de encantamiento que en Habilidades */
+.world { transition: background .15s ease, box-shadow .15s ease; }
+.world:hover,
+.world[aria-pressed="true"] {
+  border-color: #a46bff;
+  background: rgba(40, 10, 70, .6);
+  box-shadow: 0 0 14px rgba(164, 107, 255, .55);
+}
 .world:focus-visible { outline: 3px solid #fff; }
 /* Captura difuminada al fondo del mundo (solo si el proyecto tiene "preview") */
 .world.has-bg { position: relative; overflow: hidden; flex-shrink: 0; } /* sin encogerse en la lista */

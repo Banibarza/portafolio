@@ -88,19 +88,6 @@ body:not([data-screen="inicio"]) .bg-shade { background: rgba(0,0,0,.45); }
   50%      { transform: translateY(-5px) rotate(0deg); }
   75%      { transform: translateY(-3px) rotate(0.4deg); }
 }
-.edition {
-  position: relative; z-index: 1;
-  display: block;
-  width: fit-content;
-  margin: -14px auto 0;
-  font: 400 clamp(10px, 1.7vw, 15px)/1 var(--f-head);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #e9e2d0;
-  text-shadow:
-    -2px 0 #2a2a2a, 2px 0 #2a2a2a, 0 -2px #2a2a2a, 0 2px #2a2a2a,
-    3px 4px 0 #000;
-}
 .splash {
   position: absolute;
   right: -4%; bottom: 2%;
@@ -473,7 +460,8 @@ h3 {
 
 /* ---------- Gólem de cobre del inicio ---------- */
 #golem {
-  position: fixed; left: 0; bottom: 18px; z-index: 0;
+  /* Camina por delante del menú (no bloquea clics) */
+  position: fixed; left: 0; bottom: 18px; z-index: 5;
   width: clamp(150px, 20vw, 260px); aspect-ratio: 1;
   pointer-events: none;
   will-change: transform;
@@ -527,7 +515,6 @@ body:not([data-screen="inicio"]) #allay { display: none; }
   /* --- Inicio: contenido centrado en la pantalla --- */
   .screen-title { justify-content: center; padding-top: 24px; padding-bottom: 64px; }
   .logo-wrap { width: min(420px, 94vw); margin-bottom: 30px; }
-  .edition { margin-top: -6px; }
   .splash {
     position: static; display: block; width: fit-content;
     margin: 12px auto 0;

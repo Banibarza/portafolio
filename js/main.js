@@ -544,8 +544,10 @@ async function runGolem() {
 const ALLAY = {
   src:   'img/inicio/Allay_Fly_Different_Angle.webp',
   speed: 170,      // píxeles por segundo
+  minTime: 7000,   // ms mínimos para cruzar (en teléfono la pantalla es angosta)
   wave:  0.32,     // qué tanto sube y baja (fracción del alto del logo)
   waves: 3,        // cuántas veces sube y baja en todo el camino
+  wavesPhone: 2,   // en pantallas angostas sube y baja menos veces
   delay: 600       // ms de espera después de que se va el gólem
 };
 
@@ -559,6 +561,7 @@ async function runAllay() {
   const W = window.innerWidth, H = window.innerHeight;
   const w = el.offsetWidth, h = el.offsetHeight;
   const from = -w, to = W;
+  const waves = W < 680 ? ALLAY.wavesPhone : ALLAY.waves;
 
   // La ruta va a la altura del nombre (centro del logo).
   const logo = $('#inicio .logo');
@@ -573,14 +576,14 @@ async function runAllay() {
     const t = i / steps;
     const x = from + (to - from) * t;
     // Nunca se sale por arriba de la pantalla
-    const y = Math.max(6, midY - amp * Math.sin(2 * Math.PI * ALLAY.waves * t) - h / 2);
+    const y = Math.max(6, midY - amp * Math.sin(2 * Math.PI * waves * t) - h / 2);
     // Se inclina un poco según suba o baje
-    const tilt = -10 * Math.cos(2 * Math.PI * ALLAY.waves * t);
+    const tilt = -10 * Math.cos(2 * Math.PI * waves * t);
     frames.push({ transform: `translate(${x}px, ${y}px) rotate(${tilt}deg)` });
   }
 
   await el.animate(frames, {
-    duration: (to - from) / ALLAY.speed * 1000,
+    duration: Math.max((to - from) / ALLAY.speed * 1000, ALLAY.minTime),
     easing: 'linear',
     fill: 'forwards'
   }).finished;

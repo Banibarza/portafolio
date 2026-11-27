@@ -533,6 +533,58 @@ async function runGolem() {
   img.src = encodeURI(GOLEM.walk);
   await walk(stopX, -size);                   // se va por la izquierda
   el.hidden = true;
+
+  await runAllay();                           // después del gólem llega el allay
+}
+
+/* =========================================================
+   Allay: después del gólem cruza volando de izquierda a derecha
+   por encima del nombre (el logo de arriba), subiendo y bajando.
+   ========================================================= */
+const ALLAY = {
+  src:   'img/inicio/Allay_Fly_Different_Angle.webp',
+  speed: 170,      // píxeles por segundo
+  wave:  0.32,     // qué tanto sube y baja (fracción del alto del logo)
+  waves: 3,        // cuántas veces sube y baja en todo el camino
+  delay: 600       // ms de espera después de que se va el gólem
+};
+
+async function runAllay() {
+  try { await loadImg(ALLAY.src); } catch (e) { return; }
+  await new Promise(r => setTimeout(r, ALLAY.delay));
+
+  const el = $('#allay');
+  $('img', el).src = encodeURI(ALLAY.src);
+  el.hidden = false;
+  const W = window.innerWidth, H = window.innerHeight;
+  const w = el.offsetWidth, h = el.offsetHeight;
+  const from = -w, to = W;
+
+  // La ruta va a la altura del nombre (centro del logo).
+  const logo = $('#inicio .logo');
+  const box = logo ? logo.getBoundingClientRect() : null;
+  const midY = box && box.height ? box.top + box.height / 2 : H * 0.25;
+  const amp = (box && box.height ? box.height : H * 0.2) * ALLAY.wave;
+
+  // Puntos de la ruta: avanza a la derecha subiendo y bajando sobre el nombre.
+  const steps = 60;
+  const frames = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const x = from + (to - from) * t;
+    // Nunca se sale por arriba de la pantalla
+    const y = Math.max(6, midY - amp * Math.sin(2 * Math.PI * ALLAY.waves * t) - h / 2);
+    // Se inclina un poco según suba o baje
+    const tilt = -10 * Math.cos(2 * Math.PI * ALLAY.waves * t);
+    frames.push({ transform: `translate(${x}px, ${y}px) rotate(${tilt}deg)` });
+  }
+
+  await el.animate(frames, {
+    duration: (to - from) / ALLAY.speed * 1000,
+    easing: 'linear',
+    fill: 'forwards'
+  }).finished;
+  el.hidden = true;
 }
 
 function pickSplash() {
@@ -543,12 +595,7 @@ function pickSplash() {
    Logros
    ========================================================= */
 function updateAchCount() {
-  const got = state.unlocked.length, total = Object.keys(ACHIEVEMENTS).length;
-  $('#ach-count').textContent = `Logros: ${got}/${total}`;
-  // Barra de experiencia del perfil: nivel = logros, barra = progreso
-  $('#xp-level').textContent = got;
-  $('#xp-fill').style.width = `${Math.round(got / total * 100)}%`;
-  $('#xp').title = `Nivel ${got}: ${got} de ${total} logros`;
+  $('#ach-count').textContent = `Logros: ${state.unlocked.length}/${Object.keys(ACHIEVEMENTS).length}`;
 }
 
 function unlock(id) {

@@ -300,40 +300,24 @@ h3 {
 
 .player-card figcaption { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 
-/* Barra de experiencia, como la del juego: delgada, con muescas y el nivel encima */
-.xp { position: relative; width: 100%; padding-top: 14px; }
-.xp-level {
-  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  font: 400 12px/1 var(--f-head); color: #80ff20;
-  /* Contorno negro de 1 px alrededor del número */
-  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
-               2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-  z-index: 1;
-}
+/* Barra de experiencia, con las esquinas redondeadas */
 .xp-bar {
-  position: relative;
-  height: 10px;
-  background: #000;
+  width: 100%; height: 12px;
+  background: #1c1c1c;
   border: 2px solid #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 0 #000;
 }
-/* Fondo vacío de la barra */
-.xp-bar::before {
-  content: ""; position: absolute; inset: 0;
-  background: #2b2b2b; box-shadow: inset 0 2px 0 #1a1a1a;
-}
-/* Muescas negras, por encima de lo vacío y de lo lleno */
-.xp-bar::after {
-  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: repeating-linear-gradient(90deg, transparent 0 calc(100% / 18 - 2px), #000 calc(100% / 18 - 2px) calc(100% / 18));
-}
-/* Parte llena: verde con brillo arriba y sombra abajo */
 .xp-bar span {
-  position: absolute; left: 0; top: 0; bottom: 0; z-index: 1;
-  width: 0; overflow: hidden;
-  background: #80ff20;
-  box-shadow: inset 0 2px 0 #c6ff8a, inset 0 -2px 0 #3c9a00;
-  transition: width .9s steps(12, end) .25s;
+  display: block; height: 100%; width: 0;
+  border-radius: 6px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 calc(10% - 2px), #000 calc(10% - 2px) 10%),
+    linear-gradient(#b5ff5a, #5bc81c 60%, #3f8f12);
 }
+#sobre-mi:not([hidden]) .xp-bar span { animation: xp-fill 1.1s .2s steps(14, end) forwards; }
+@keyframes xp-fill { to { width: 72%; } }
 
 .player-role { color: #80ff20; text-shadow: 2px 2px 0 #1f3f08; font-size: 22px; line-height: 1; }
 .player-status { color: var(--muted); font-size: 18px; line-height: 1; }
@@ -478,6 +462,7 @@ h3 {
 /* ---------- Movimiento reducido ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  .xp-bar span { width: 72%; }
 }
 /* Fila de dos botones al pie de una pantalla (p. ej. Descargar CV + Contáctame) */
 .foot-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -496,6 +481,24 @@ h3 {
 #golem[hidden] { display: none; }
 #golem img { width: 100%; height: 100%; display: block; image-rendering: auto; filter: drop-shadow(0 6px 0 rgba(0,0,0,.25)); }
 body:not([data-screen="inicio"]) #golem { display: none; }
+
+/* ---------- Allay del inicio (sale después del gólem) ---------- */
+/* La ruta (curva con ondas, de izquierda a derecha) la calcula main.js */
+#allay {
+  /* Vuela por delante del menú (no bloquea clics) */
+  position: fixed; left: 0; top: 0; z-index: 5;
+  width: clamp(130px, 17vw, 230px); aspect-ratio: 1.57;
+  pointer-events: none;
+  will-change: transform;
+}
+#allay[hidden] { display: none; }
+#allay img {
+  width: 100%; height: 100%; display: block; object-fit: contain;
+  /* El archivo mira a la izquierda: se voltea para que mire hacia donde vuela */
+  transform: scaleX(-1);
+  filter: drop-shadow(0 10px 6px rgba(0,0,0,.25));
+}
+body:not([data-screen="inicio"]) #allay { display: none; }
 #app { position: relative; z-index: 1; }
 
 /* =========================================================
@@ -539,6 +542,7 @@ body:not([data-screen="inicio"]) #golem { display: none; }
   .icon-btn { width: 50px; min-width: 50px; }
   .corner-bar { padding-bottom: max(4px, env(safe-area-inset-bottom)); }
   #golem { width: 120px; bottom: 30px; }
+  #allay { width: 120px; }
 
   /* --- Pantallas internas: la página hace scroll, no las cajas --- */
   .screen-head { margin-bottom: 10px; }

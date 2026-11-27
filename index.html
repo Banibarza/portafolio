@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=33">
+  <link rel="stylesheet" href="css/style.css?v=34">
 </head>
 <body>
 
@@ -96,7 +96,11 @@
             </div>
           </div>
           <figcaption>
-            <div class="xp-bar" aria-hidden="true"><span></span></div>
+            <!-- Barra de experiencia: el nivel son los logros conseguidos -->
+            <div class="xp" id="xp" title="Nivel = logros conseguidos">
+              <span class="xp-level" id="xp-level">0</span>
+              <div class="xp-bar"><span id="xp-fill"></span></div>
+            </div>
             <span class="player-role">Desarrollador backend</span>
             <span class="player-status">En línea</span>
           </figcaption>
@@ -195,6 +199,6 @@
   <div id="toasts" aria-live="polite"></div>
   <div id="tooltip" class="tip" role="tooltip" hidden></div>
 
-  <script src="js/main.js?v=33"></script>
+  <script src="js/main.js?v=34"></script>
 </body>
 </html>

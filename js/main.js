@@ -543,7 +543,12 @@ function pickSplash() {
    Logros
    ========================================================= */
 function updateAchCount() {
-  $('#ach-count').textContent = `Logros: ${state.unlocked.length}/${Object.keys(ACHIEVEMENTS).length}`;
+  const got = state.unlocked.length, total = Object.keys(ACHIEVEMENTS).length;
+  $('#ach-count').textContent = `Logros: ${got}/${total}`;
+  // Barra de experiencia del perfil: nivel = logros, barra = progreso
+  $('#xp-level').textContent = got;
+  $('#xp-fill').style.width = `${Math.round(got / total * 100)}%`;
+  $('#xp').title = `Nivel ${got}: ${got} de ${total} logros`;
 }
 
 function unlock(id) {

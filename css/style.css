@@ -426,7 +426,12 @@ h3 {
 .tab-icon { width: 30px; height: 30px; flex: none; }
 .tab-icon svg, .tab-icon img { width: 100%; height: 100%; display: block; }
 
-.book-body { display: flex; flex-direction: column; gap: 8px; max-height: 56svh; overflow-y: auto; padding-right: 4px; }
+.book-body {
+  display: flex; flex-direction: column; gap: 8px; max-height: 56svh; overflow-y: auto; padding-right: 4px;
+  /* Sin barra de desplazamiento visible (se sigue pudiendo desplazar) */
+  scrollbar-width: none;
+}
+.book-body::-webkit-scrollbar { display: none; }
 .book-body.is-timeline { border-left: 4px solid #6f6f6f; padding-left: 12px; margin-left: 6px; }
 
 /* Habilidades: tarjetas en cuadrícula */

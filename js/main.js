@@ -565,7 +565,7 @@ function showToast(name) {
   setTimeout(() => {
     box.classList.add('out');
     box.addEventListener('animationend', () => box.remove(), { once: true });
-  }, 3800);
+  }, 2200);
 }
 
 /* =========================================================

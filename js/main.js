@@ -119,7 +119,7 @@ const EXPERIENCES = [
     place: 'Proyectos personales',
     period: '2026',
     desc: 'Chatbot con IA local (Spring AI y Ollama) con respuestas en streaming, bot de Telegram y chat en tiempo real con WebSocket.',
-    icon: 'pico'
+    icon: 'brujula'
   },
   {
     title: '3er lugar en hackatón · Recolección de basura',

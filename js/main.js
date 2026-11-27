@@ -27,7 +27,7 @@ const PROJECTS = [
           'Mi parte es el backend del módulo de Gestión Académica: grupos, horarios, aspirantes y preinscripción, ' +
           'y calificaciones, con autenticación JWT y control de acceso por roles. Las pruebas corren contra PostgreSQL real.',
     stack: ['Laravel 12', 'PHP 8.4', 'PostgreSQL 16', 'Docker', 'JWT', 'Spatie Permission', 'Pest', 'Git Flow'],
-    icon: 'cofre',
+    icon: 'pasto',
     tag: 'Residencia profesional'
   },
   {
@@ -48,7 +48,7 @@ const PROJECTS = [
           'Las respuestas se envían en streaming, así que el texto aparece mientras el modelo lo genera, ' +
           'en una interfaz web sencilla.',
     stack: ['Java 17', 'Spring Boot', 'Spring AI', 'Ollama', 'HTML', 'JavaScript'],
-    icon: 'estrella',
+    icon: 'pasto',
     tag: 'Inteligencia artificial'
   },
   {
@@ -57,7 +57,7 @@ const PROJECTS = [
     desc: 'Aplicación en Java con Spring Boot que integra la API de Telegram: recibe los mensajes enviados al bot, ' +
           'los procesa y responde automáticamente a cada usuario.',
     stack: ['Java', 'Spring Boot', 'Telegram API', 'Maven'],
-    icon: 'brujula',
+    icon: 'pasto',
     tag: 'Integración de APIs'
   },
   {
@@ -66,7 +66,7 @@ const PROJECTS = [
     desc: 'Aplicación de chat en tiempo real con Spring WebSocket. El servidor gestiona las conexiones ' +
           'y reenvía cada mensaje a los usuarios conectados, con un cliente web en Thymeleaf y JavaScript.',
     stack: ['Java', 'Spring Boot', 'WebSocket', 'Thymeleaf', 'JavaScript'],
-    icon: 'esmeralda',
+    icon: 'pasto',
     tag: 'Tiempo real'
   }
 ];

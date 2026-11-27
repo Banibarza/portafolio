@@ -28,6 +28,8 @@ body {
 }
 
 img { image-rendering: pixelated; }
+/* Capturas de proyectos: suavizadas (en HD), no pixeladas como los objetos del juego */
+.preview-shot img, .world-thumb img, .lightbox-box img { image-rendering: auto; }
 
 /* ---------- Fondo de video (img/inicio/video.mp4) ---------- */
 .bg {

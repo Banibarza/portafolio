@@ -28,7 +28,7 @@ const PROJECTS = [
           'y calificaciones, con autenticación JWT y control de acceso por roles. Las pruebas corren contra PostgreSQL real.',
     stack: ['Laravel 12', 'PHP 8.4', 'PostgreSQL 16', 'Docker', 'JWT', 'Spatie Permission', 'Pest', 'Git Flow'],
     icon: 'pasto',
-    preview: 'img/proyectos/sietec28.webp', // captura que se muestra en el detalle (opcional)
+    preview: 'img/proyectos/sietec28.webp?v=2', // captura que se muestra en el detalle (opcional)
     tag: 'Residencia profesional'
   },
   {

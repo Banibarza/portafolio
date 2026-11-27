@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=30">
+  <link rel="stylesheet" href="css/style.css?v=33">
 </head>
 <body>
 
@@ -87,6 +87,22 @@
         <h2 id="t-sobre">Perfil profesional</h2>
       </header>
       <div class="panel panel-about">
+        <!-- Tarjeta de jugador: foto en marco de inventario, etiqueta de nombre y barra de experiencia -->
+        <figure class="player-card">
+          <div class="name-tag">Bani Rafael</div>
+          <div class="photo-frame">
+            <div class="photo-slot">
+              <img src="img/inicio/fotografia.jpeg" alt="Foto de Bani Rafael Juárez Barza" width="937" height="1106" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <figcaption>
+            <div class="xp-bar" aria-hidden="true"><span></span></div>
+            <span class="player-role">Desarrollador backend</span>
+            <span class="player-status">En línea</span>
+          </figcaption>
+        </figure>
+
+        <div class="about-body">
         <p>
           Estudiante de Ingeniería en Tecnologías de la Información y Comunicaciones, especializado
           en desarrollo backend. Construyo sistemas web y APIs con Laravel y Spring Boot, y diseño
@@ -102,6 +118,7 @@
           <div><dt>Ubicación</dt><dd>Salina Cruz, Oaxaca, México</dd></div>
           <div><dt>Disponibilidad</dt><dd>Abierto a nuevas oportunidades</dd></div>
         </dl>
+        </div>
       </div>
       <div class="screen-foot">
         <div class="foot-row">
@@ -178,6 +195,6 @@
   <div id="toasts" aria-live="polite"></div>
   <div id="tooltip" class="tip" role="tooltip" hidden></div>
 
-  <script src="js/main.js?v=32"></script>
+  <script src="js/main.js?v=33"></script>
 </body>
 </html>

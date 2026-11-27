@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=44">
+  <link rel="stylesheet" href="css/style.css?v=47">
 </head>
 <body>
 
@@ -69,6 +69,17 @@
         <h2 id="t-detalle">Proyecto</h2>
       </header>
       <div class="panel panel-detail">
+        <!-- Muestra del proyecto (solo si tiene "preview" en PROJECTS) -->
+        <figure class="preview" id="d-preview" hidden>
+          <a class="preview-shot" id="d-preview-link" href="#" target="_blank" rel="noopener" title="Ver captura completa">
+            <img id="d-preview-img" alt="" decoding="async">
+            <figcaption>
+              <span class="preview-tag" id="d-preview-tag"></span>
+              <span class="preview-name" id="d-preview-name"></span>
+              <span class="preview-stack" id="d-preview-stack"></span>
+            </figcaption>
+          </a>
+        </figure>
         <p class="detail-sub" id="d-sub"></p>
         <p id="d-desc"></p>
         <h3>Tecnologías</h3>
@@ -195,6 +206,6 @@
   <div id="toasts" aria-live="polite"></div>
   <div id="tooltip" class="tip" role="tooltip" hidden></div>
 
-  <script src="js/main.js?v=47"></script>
+  <script src="js/main.js?v=48"></script>
 </body>
 </html>

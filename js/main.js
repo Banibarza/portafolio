@@ -28,6 +28,7 @@ const PROJECTS = [
           'y calificaciones, con autenticación JWT y control de acceso por roles. Las pruebas corren contra PostgreSQL real.',
     stack: ['Laravel 12', 'PHP 8.4', 'PostgreSQL 16', 'Docker', 'JWT', 'Spatie Permission', 'Pest', 'Git Flow'],
     icon: 'pasto',
+    preview: 'img/proyectos/sietec28.webp', // captura que se muestra en el detalle (opcional)
     tag: 'Residencia profesional'
   },
   {
@@ -696,6 +697,18 @@ function fillProject() {
   const stack = $('#d-stack');
   stack.innerHTML = '';
   p.stack.forEach(t => { const li = document.createElement('li'); li.textContent = t; stack.appendChild(li); });
+
+  // Muestra del proyecto: captura con su nombre encima
+  const prev = $('#d-preview');
+  prev.hidden = !p.preview;
+  if (p.preview) {
+    $('#d-preview-img').src = p.preview;
+    $('#d-preview-img').alt = `Captura de ${p.name}`;
+    $('#d-preview-link').href = p.preview;
+    $('#d-preview-tag').textContent = p.tag;
+    $('#d-preview-name').textContent = p.name;
+    $('#d-preview-stack').textContent = p.stack.slice(0, 3).join(' · ');
+  }
 }
 
 function openProject() {

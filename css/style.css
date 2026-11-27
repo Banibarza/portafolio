@@ -462,7 +462,7 @@ h3 {
 #golem {
   /* Camina por delante del menú (no bloquea clics) */
   position: fixed; left: 0; bottom: 18px; z-index: 5;
-  width: clamp(150px, 20vw, 260px); aspect-ratio: 1;
+  width: clamp(110px, 14vw, 190px); aspect-ratio: 1;
   pointer-events: none;
   will-change: transform;
 }
@@ -528,7 +528,7 @@ body:not([data-screen="inicio"]) #allay { display: none; }
   .menu-row { margin-top: 10px; }
   .icon-btn { width: 50px; min-width: 50px; }
   .corner-bar { padding-bottom: max(4px, env(safe-area-inset-bottom)); }
-  #golem { width: 120px; bottom: 30px; }
+  #golem { width: 95px; bottom: 30px; }
   #allay { width: 120px; }
 
   /* --- Pantallas internas: la página hace scroll, no las cajas --- */

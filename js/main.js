@@ -300,7 +300,6 @@ const SOUND_EXTS = ['ogg', 'mp3', 'wav'];
 const SOUNDS = {
   tocar:  { vol: 0.6 },
   logro:  { vol: 0.7 },
-  mundo:  { vol: 0.7 },
   musica: { vol: 0.25, loop: true }
 };
 const soundFiles = {}; // nombre -> HTMLAudioElement que sí cargó
@@ -437,9 +436,8 @@ function tone(freq, dur, { type = 'square', vol = 0.05, delay = 0 } = {}) {
     osc.stop(t + dur);
   } catch (e) { /* audio no disponible */ }
 }
-const clickSound = () => play('tocar', () => { tone(220, 0.06); tone(150, 0.05, { delay: 0.02 }); });
+const clickSound = () => play('tocar');
 const levelSound = () => play('logro', () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.14, { type: 'triangle', vol: 0.07, delay: i * 0.09 })));
-const worldSound = () => play('mundo', () => [392, 523].forEach((f, i) => tone(f, 0.12, { type: 'triangle', vol: 0.06, delay: i * 0.08 })));
 
 /* =========================================================
    Navegación entre pantallas
@@ -625,7 +623,6 @@ function fillProject() {
 
 function openProject() {
   fillProject();
-  worldSound();
   go('detalle');
 }
 

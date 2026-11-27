@@ -176,7 +176,22 @@ body:not([data-screen="inicio"]) .bg-shade { background: rgba(0,0,0,.45); }
 
 /* ---------- Pantallas internas ---------- */
 .screen-head { text-align: center; margin-bottom: 14px; }
-.logo-mini { height: clamp(34px, 6vw, 50px); width: auto; display: block; margin: 0 auto 10px; }
+/* Nombre en una sola línea: se usan las dos líneas de img/logo.png lado a lado.
+   logo.png mide 996×342: "Bani Rafael" está en x 34–979, y 0–142;
+   "Juarez Barza" en x 0–995, y 199–341. */
+.logo-mini {
+  --h: clamp(20px, 3vw, 28px);
+  display: flex; justify-content: center; align-items: center;
+  gap: calc(var(--h) * .45);
+  height: var(--h);
+  margin: 0 auto 10px;
+}
+.logo-part {
+  height: 100%;
+  background: url("../img/logo.png") no-repeat;
+}
+.logo-part.l1 { aspect-ratio: 946 / 143; background-size: 105.285% 239.16%; background-position: 68% 0; }
+.logo-part.l2 { aspect-ratio: 996 / 143; background-size: 100% 239.16%; background-position: 0 100%; }
 h2 {
   margin: 0;
   font: 400 clamp(13px, 2.2vw, 18px)/1.5 var(--f-head);
@@ -533,7 +548,7 @@ body:not([data-screen="inicio"]) #allay { display: none; }
 
   /* --- Pantallas internas: la página hace scroll, no las cajas --- */
   .screen-head { margin-bottom: 10px; }
-  .logo-mini { height: 30px; margin-bottom: 6px; }
+  .logo-mini { --h: 17px; margin-bottom: 6px; }
   h2 { font-size: 13px; }
   .panel { padding: 14px 12px; }
   .world-list, .book-body { max-height: none; overflow: visible; padding-right: 0; }

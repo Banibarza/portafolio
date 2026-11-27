@@ -305,16 +305,20 @@ const SOUNDS = {
   musica: { vol: 0.25, loop: true }
 };
 const soundFiles = {}; // nombre -> HTMLAudioElement que sí cargó
+const soundUrls = {};  // nombre -> URL que funcionó, o null si no hay archivo
 
+// Prueba las extensiones en orden. Se da por buena con 'loadedmetadata'
+// (no 'canplaythrough', que en móviles a veces nunca llega).
 function probeSound(name) {
   return new Promise(resolve => {
     const tryExt = i => {
       if (i >= SOUND_EXTS.length) return resolve(null);
       const a = new Audio();
       a.preload = 'auto';
-      a.addEventListener('canplaythrough', () => resolve(a), { once: true });
+      a.addEventListener('loadedmetadata', () => resolve(a), { once: true });
       a.addEventListener('error', () => tryExt(i + 1), { once: true });
       a.src = `${SOUND_DIR}${name}.${SOUND_EXTS[i]}`;
+      a.load();
     };
     tryExt(0);
   });
@@ -322,6 +326,7 @@ function probeSound(name) {
 
 function loadSounds() {
   Object.keys(SOUNDS).forEach(name => probeSound(name).then(a => {
+    soundUrls[name] = a ? a.src : null;
     if (!a) return;
     a.volume = SOUNDS[name].vol;
     a.loop = !!SOUNDS[name].loop;
@@ -330,14 +335,23 @@ function loadSounds() {
   }));
 }
 
-// Reproduce el archivo si existe; si no, llama al sonido sintetizado.
+// Reproduce el archivo si existe; solo usa el sintetizado si el archivo
+// definitivamente no está (o falla al reproducirse).
 function play(name, fallback) {
   if (!state.sound) return;
-  const a = soundFiles[name];
-  if (!a) { if (fallback) fallback(); return; }
-  const s = a.cloneNode();
-  s.volume = a.volume;
-  s.play().catch(() => {});
+  const known = soundUrls[name];
+  if (known === null) { if (fallback) fallback(); return; }
+  const urls = known ? [known] : SOUND_EXTS.map(ext => `${SOUND_DIR}${name}.${ext}`);
+  const tryUrl = i => {
+    if (i >= urls.length) { if (fallback) fallback(); return; }
+    const s = new Audio(urls[i]);
+    s.volume = SOUNDS[name] ? SOUNDS[name].vol : 1;
+    let failed = false;
+    const fail = () => { if (failed) return; failed = true; tryUrl(i + 1); };
+    s.addEventListener('error', fail, { once: true });
+    s.play().catch(err => { if (err && err.name === 'NotSupportedError') fail(); });
+  };
+  tryUrl(0);
 }
 
 // La música solo puede empezar tras una interacción del usuario.

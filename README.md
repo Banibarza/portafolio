@@ -4,15 +4,14 @@ Abre `index.html` en el navegador (doble clic). No necesita servidor ni instalac
 Necesita internet solo para cargar las fuentes de Google Fonts.
 
 ## Estructura
-portafolio-minecraft/
+portafolio/
 ├── index.html
 ├── css/style.css
 ├── js/main.js
 ├── img/logo.png
 ├── img/inicio/          (video de fondo y gólem de cobre del inicio)
 └── assets/
-    ├── iconos/           (tus iconos PNG; ver LEEME.md dentro)
-    └── sonidos/          (tus sonidos .ogg/.mp3/.wav; ver LEEME.md dentro)
+    └── sonidos/          (tus sonidos .ogg/.mp3/.wav)
 
 Si falta un icono o sonido, se usa el que viene integrado.
 

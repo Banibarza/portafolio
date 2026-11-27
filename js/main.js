@@ -8,7 +8,7 @@ const CONFIG = {
   email: 'banibarza19@gmail.com',
   github: 'https://github.com/Banibarza',
   linkedin: 'https://www.linkedin.com/in/bani-rafael-juarez-barza-67711b2b2/',
-  cv: 'docs/CV_Bani_Rafael_Juarez_Barza.pdf'   // PDF que baja el botón "Descargar CV"
+  cv: 'docs/CV_Bani_Rafael_Juarez_Barza.pdf?v=2'   // PDF que baja el botón "Descargar CV" (sube ?v= al cambiarlo)
 };
 
 const SPLASHES = [
@@ -965,7 +965,7 @@ $('#btn-cv').addEventListener('click', () => {
   if (!CONFIG.cv) return;
   const a = document.createElement('a');
   a.href = CONFIG.cv;
-  a.download = CONFIG.cv.split('/').pop();
+  a.download = CONFIG.cv.split('/').pop().split('?')[0];
   document.body.appendChild(a);
   a.click();
   a.remove();

@@ -158,8 +158,7 @@ const ACHIEVEMENTS = {
   'sobre-mi':    'Conociendo al jugador',
   'habilidades': 'Libro de habilidades',
   'contacto':    'Mensaje en una botella',
-  'opciones':    'Ajustes finos',
-  'salir':       '¿El fin?'
+  'opciones':    'Ajustes finos'
 };
 
 /* =========================================================
@@ -280,7 +279,7 @@ function loadState() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
     ['sound', 'achievements'].forEach(k => { if (k in saved) state[k] = saved[k]; });
-    if (Array.isArray(saved.unlocked)) state.unlocked = saved.unlocked;
+    if (Array.isArray(saved.unlocked)) state.unlocked = saved.unlocked.filter(id => id in ACHIEVEMENTS);
   } catch (e) { /* sin almacenamiento: se usa el estado por defecto */ }
 }
 function saveState() {
@@ -736,7 +735,6 @@ function renderOptions() {
 /* Iconos fijos de la interfaz (se repintan si aparece un PNG propio) */
 function renderStaticIcons() {
   $('#badge-contact').innerHTML = icon('esmeralda');
-  $('#end-icon').innerHTML = icon('diamante');
 }
 
 function renderAll() {
@@ -784,7 +782,18 @@ document.addEventListener('click', e => {
   else if (el.hasAttribute('data-back')) back();
   else if (el.dataset.opt) onOption(el.dataset.opt);
   else if (el.id === 'btn-play-world') openProject();
+  else if (el.id === 'btn-exit') exitSite();
 });
+
+// Cierra la pestaña. Los navegadores solo dejan cerrar con window.close()
+// las pestañas abiertas por un script; si no se puede, se deja en blanco.
+function exitSite() {
+  // Pequeña espera para que se oiga el sonido del botón.
+  setTimeout(() => {
+    window.close();
+    setTimeout(() => { if (!window.closed) location.replace('about:blank'); }, 150);
+  }, 250);
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && state.screen !== 'inicio') { clickSound(); back(); }

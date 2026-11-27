@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=28">
+  <link rel="stylesheet" href="css/style.css?v=30">
 </head>
 <body>
 
@@ -38,13 +38,13 @@
         <div class="menu-row">
           <button class="mc-btn icon-btn" type="button" data-opt="sound" id="btn-sound"></button>
           <button class="mc-btn" type="button" data-go="opciones">Opciones...</button>
-          <button class="mc-btn" type="button" data-go="salir">Salir</button>
+          <button class="mc-btn" type="button" id="btn-exit">Salir</button>
         </div>
       </nav>
 
       <footer class="corner-bar">
         <span id="version-text">Portafolio 1.0</span>
-        <span><span id="ach-count">Logros: 0/7</span><span class="copy"> · Copyright Bani Rafael. ¡Hecho con código!</span></span>
+        <span><span id="ach-count">Logros: 0/6</span><span class="copy"> · Copyright Bani Rafael. ¡Hecho con código!</span></span>
       </footer>
     </section>
 
@@ -169,19 +169,6 @@
       </div>
     </section>
 
-    <!-- ============ FINAL ============ -->
-    <section class="screen screen-end" id="salir" aria-labelledby="t-end" hidden>
-      <div class="adv-box">
-        <div class="adv-title"><span class="adv-icon" id="end-icon"></span> ¡Logro conseguido! <b>¿El fin?</b></div>
-        <div class="adv-body">
-          <h2 id="t-end">¡Gracias por visitar!</h2>
-          <p>Cerraste el portafolio, pero el mundo sigue abierto.</p>
-        </div>
-      </div>
-      <div class="screen-foot">
-        <button class="mc-btn" type="button" data-go="inicio" data-autofocus>Volver al inicio</button>
-      </div>
-    </section>
 
   </main>
 
@@ -191,6 +178,6 @@
   <div id="toasts" aria-live="polite"></div>
   <div id="tooltip" class="tip" role="tooltip" hidden></div>
 
-  <script src="js/main.js?v=29"></script>
+  <script src="js/main.js?v=30"></script>
 </body>
 </html>
